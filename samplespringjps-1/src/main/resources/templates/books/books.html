@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Home</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+		<style>
+			th,tr,table{
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<nav class="navbar navbar-inverse">
+		  <div class="container-fluid">
+		    <div class="navbar-header">
+		      <a class="navbar-brand" href="">Welcome</a>
+		    </div>
+		    <ul class="nav navbar-nav">
+		      <li class="active"><a th:href="@{/home/home}">Dashboard</a></li>
+		      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Books <span class="caret"></span></a>
+		        <ul class="dropdown-menu">
+		          <li><a th:href="@{/rest/list_books/?uid={uid}(uid=${uid})}">View Books</a></li>
+		          <li><a href="">Return Books</a></li>
+		        </ul>
+		      </li>
+		    </ul>
+		    <ul class="nav navbar-nav navbar-right">
+		      <li> <a th:href="@{/logout}"><span class="glyphicon glyphicon-log-in"></span> Sign out</a></li>
+		    </ul>
+		  </div>
+		</nav>
+		<div class="container">
+			<div class="container">
+			  <h2>Book List</h2>
+			  <div class="alert alert-success" role="alert" th:if="${msg}" th:utext="${msg}">
+     		  </div>
+			  <table class="table table-bordered">
+			    <thead>
+			      <tr>
+			        <th>Book Id</th>
+			        <th>Book Name</th>
+			        <th>Book Author Name</th>
+			        <th>Book Publication Name</th>
+			        <th>Book Price </th>
+			        <th>Book Stock</th>
+			        <th>Request Book</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <tr th:each="books : ${listBooks}">
+					<td th:text="${books?.id}"></td>
+					<td th:text="${books?.name}"></td>
+					<td th:text="${books?.authername}"></td>
+					<td th:text="${books?.publicationname}"></td>
+					<td th:text="${books?.price}"></td>
+					<td th:text="${books?.stock}"></td>
+					<!-- @{/edit_book/?id={id}(id=${book.id})} -->
+					<td>
+						<a th:href="@{/rest/request/?id={id}&uid={uid}(id=${books?.id},uid=${uid})}" class="btn btn-info">Request</a> 
+					</td>
+			      </tr>
+			    </tbody>
+			  </table>
+			</div>
+		</div>
+		<div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Home</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+		<style>
+			th,tr,table{
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<nav class="navbar navbar-inverse">
+		  <div class="container-fluid">
+		    <div class="navbar-header">
+		      <a class="navbar-brand" href="">Welcome</a>
+		    </div>
+		    <ul class="nav navbar-nav">
+		      <li class="active"><a th:href="@{/home/home}">Dashboard</a></li>
+		      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Books <span class="caret"></span></a>
+		        <ul class="dropdown-menu">
+		          <li><a th:href="@{/rest/list_books}">View Books</a></li>
+		          <li><a href="">Request Books</a></li>
+		        </ul>
+		      </li>
+		    </ul>
+		    <ul class="nav navbar-nav navbar-right">
+		      <li> <a th:href="@{/logout}"><span class="glyphicon glyphicon-log-in"></span> Sign out</a></li>
+		    </ul>
+		  </div>
+		</nav>
+		<div>
+		  <h2>Welcome <span th:utext="${userid}"></span></h2>
+		  <form action="#" th:action="@{/save}" th:object="${listbooks}" method="post">
+ 
+            <table border="0" cellpadding="10">
+                <tr>             
+                    <td>Product ID:</td>
+                    <td>
+                        <input type="text" th:field="*{id}" readonly="readonly" />
+                    </td>
+                </tr>        
+                <tr>             
+                    <td>Product Name:</td>
+                    <td>
+                        <input type="text" th:field="*{name}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Author name:</td>
+                    <td><input type="text" th:field="*{authername}" /></td>
+                </tr>
+                <tr>
+                    <td>Publication Name:</td>
+                    <td><input type="text" th:field="*{publicationname}" /></td>
+                </tr>
+                <tr>
+                    <td>Price:</td>
+                    <td><input type="text" th:field="*{price}" /></td>
+                </tr>
+                <tr>
+                    <td>Stock:</td>
+                    <td><input type="text" th:field="*{stock}" /></td>
+                </tr>                             
+                <tr>
+                    <td colspan="2"><button type="submit">Save</button> </td>
+                </tr>
+            </table>
+        </form>
+		</div>
+	</body>
+</html>
